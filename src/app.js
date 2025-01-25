@@ -11,10 +11,6 @@ app.get('/', (req, res) => {
     res.send("hello world")
 })
 
-app.get('*', (req, res) => {
-    res.status(404).json({ message: 'Route not found!' });
-});
-
 app.use('/api', router)
 
 export { app }
