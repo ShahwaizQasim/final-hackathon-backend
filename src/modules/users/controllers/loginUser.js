@@ -1,5 +1,7 @@
 import { UserModel } from "../models/index.js";
+import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
+import { ENV } from "../../../constants.js";
 
 const LoginUser = async (req, res) => {
     try {
@@ -8,7 +10,8 @@ const LoginUser = async (req, res) => {
         if (user) {
             let checkPassword = bcrypt.compareSync(password, user.password);
             if (checkPassword) {
-                res.status(200).send({ status: 200, message: "user login successfully", })
+                const token = jwt.sign({ id: user._id, role: user.role, email: user.email }, ENV.JWT_SECURITY_KEY);
+                res.status(200).send({ status: 200, message: "user login successfully", token })
             } else {
                 res.status(401).send({ status: 401, message: "password unauthorized", })
             }
