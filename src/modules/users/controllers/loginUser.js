@@ -11,7 +11,7 @@ const LoginUser = async (req, res) => {
             let checkPassword = bcrypt.compareSync(password, user.password);
             if (checkPassword) {
                 const token = jwt.sign({ id: user._id, role: user.role, email: user.email }, ENV.JWT_SECURITY_KEY);
-                res.status(200).send({ status: 200, message: "user login successfully", token })
+                res.status(200).send({ status: 200, message: "user login successfully", data: user, token })
             } else {
                 res.status(401).send({ status: 401, message: "password unauthorized", })
             }
