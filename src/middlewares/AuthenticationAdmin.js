@@ -2,15 +2,17 @@ import { ENV } from "../constants.js";
 import jwt from "jsonwebtoken"
 import 'dotenv/config'
 
-const UserAuthenticate = (req, res, next) => {
+const AdminAuthentication = (req, res, next) => {
     try {
         if (req?.headers?.authorization) {
             const token = req?.headers?.authorization.split(" ")[1];
             const decoded = jwt.verify(token, ENV.JWT_SECURITY_KEY);
-            console.log("decoded", decoded);
-            
             if (decoded) {
-                next();
+                if (decoded.role == "admin") {
+                    next();
+                } else {
+                    res.status(401).send({ status: 401, message: "Admin Only Allow to Access" })
+                }
             } else {
                 res.status(401).send({ status: 401, message: "Unauthorized Token" })
             }
@@ -22,4 +24,4 @@ const UserAuthenticate = (req, res, next) => {
     }
 }
 
-export default UserAuthenticate;
+export default AdminAuthentication;

@@ -10,5 +10,5 @@ ConnectDB()
         })
     })
     .catch((err) => {
-        // console.log(err);
+        console.log(err);
     })
