@@ -1,6 +1,6 @@
 import { app } from "./app.js";
 import { ENV } from "./constants.js";
-import ConnectDB from "./db/index.js";
+import ConnectDB from "./db/dbConnect.js";
 import 'dotenv/config'
 
 ConnectDB()
@@ -10,5 +10,5 @@ ConnectDB()
         })
     })
     .catch((err) => {
-        console.log('err in final', err);
+        console.log(err);
     })

@@ -7,7 +7,8 @@ const UserSchema = new Schema({
         required: true,
     },
     role: {
-        type: String
+        type: String,
+        required: true
     },
     email: {
         type: String,

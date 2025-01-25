@@ -2,7 +2,7 @@ import { UserModel } from "../models/index.js";
 
 const GetUser = async (req, res) => {
     try {
-        let UserGet = await UserModel.find(req.body);
+        let UserGet = await UserModel.find();
         res.status(200).send({ status: 200, message: "user fetch successfully", User: UserGet })
     } catch (error) {
         res.status(400).send({ status: 400, message: error })
